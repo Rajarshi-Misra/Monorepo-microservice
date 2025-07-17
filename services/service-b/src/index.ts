@@ -1,21 +1,17 @@
 import express from 'express';
+import { connectRabbitMQ, consumeFromQueue } from '../../../common/src/rabbitmq';
 
 const app = express();
-app.use(express.json());
+const PORT = 3002;
 
-app.post('/receive', (req, res) => {
-  const instruction = req.body;
-  console.log('Service B received:', instruction);
+(async () => {
+  await connectRabbitMQ();
+  console.log('RabbitMQ connected for Service B');
 
-  // Simulate some processing
-  const result = {
-    received: instruction,
-    processedAt: new Date().toISOString()
-  };
+  await consumeFromQueue('my_queue', (msg) => {
+    console.log('Service B received message:', msg);
+    // process the message
+  });
 
-  return res.status(200).json(result);
-});
-
-app.listen(4001, () => {
-  console.log('Service B listening on port 4001');
-});
+  app.listen(PORT, () => console.log(`Service B on port ${PORT}`));
+})();

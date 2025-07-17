@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"      # RabbitMQ default
+      - "15672:15672"    # RabbitMQ management dashboard
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - mynth-network
+networks:
+  mynth-network:
+    driver: bridge

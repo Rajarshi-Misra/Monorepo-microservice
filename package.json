@@ -11,15 +11,20 @@
   "description": "",
   "private": true,
   "workspaces": [
-    "services/*",
+    "services/service-a",
+    "services/service-b",
     "common"
   ],
   "devDependencies": {
+    "@types/amqplib": "^0.10.7",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.6.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.8"
   }
 }
