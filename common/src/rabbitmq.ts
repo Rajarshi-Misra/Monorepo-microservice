@@ -1,7 +1,11 @@
 import amqp from 'amqplib';
 import dotenv from 'dotenv';
 import path from "path";
+
+//In an ideal case we should make a secrets file for env variables and import consts from it
+/* eslint-disable no-undef */
 dotenv.config({path: path.join(__dirname, "../../.env")});
+/* eslint-enable no-undef */
 
 let channel: amqp.Channel;
 

@@ -8,3 +8,4 @@ README.md
 coverage
 .nyc_output
 .DS_Store
+__tests__

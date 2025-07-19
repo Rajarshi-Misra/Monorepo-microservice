@@ -103,6 +103,17 @@ module.exports = defineConfig([
             '!eslint.config.js',
             '!*.config.js',
             '!*.config.mjs',
+            // Ignore all test files
+            '**/__tests__/**',
+            '**/*.test.ts',
+            '**/*.test.tsx', 
+            '**/*.test.js',
+            '**/*.spec.ts',
+            '**/*.spec.tsx',
+            '**/*.spec.js',
+            // Ignore Jest configuration files
+            '**/jest.config.js',
+            '**/jest.config.ts',
         ],
     },
 ]);

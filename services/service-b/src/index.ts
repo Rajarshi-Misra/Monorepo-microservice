@@ -13,5 +13,16 @@ const PORT = 3002;
     // process the message
   });
 
+  app.use(express.json());
+
+  app.post('/log', (req, res) => {
+    const { message } = req.body;
+    if (!message) {
+      return res.status(400).json({ error: 'Message is required' });
+    }
+    console.log('Service B log:', message);
+    res.json({ status: 'Logged' });
+  });
+
   app.listen(PORT, () => console.log(`Service B on port ${PORT}`));
 })();
