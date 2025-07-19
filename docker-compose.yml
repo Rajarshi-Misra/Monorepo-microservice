@@ -11,6 +11,13 @@ services:
     env_file: .env
     networks:
       - mynth-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+      start_period: 60s
+
   service-a:
     build:
       context: .
@@ -20,6 +27,13 @@ services:
     env_file: .env
     networks:
       - mynth-network
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    environment:
+      - NODE_ENV=production
+
   service-b:
     build:
       context: .
@@ -29,6 +43,13 @@ services:
     env_file: .env
     networks:
       - mynth-network
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    environment:
+      - NODE_ENV=production
+
 networks:
   mynth-network:
     driver: bridge
