@@ -1,9 +1,15 @@
 import amqp from 'amqplib';
+import dotenv from 'dotenv';
+import path from "path";
+dotenv.config({path: path.join(__dirname, "../../.env")});
 
 let channel: amqp.Channel;
 
 export const connectRabbitMQ = async () => {
-  const connection = await amqp.connect('amqp://guest:guest@localhost:5672'); // hostname from Docker
+  if (!process.env.RABBITMQ_URL) {
+    throw new Error('RABBITMQ_URL environment variable is not set');
+  }
+  const connection = await amqp.connect(process.env.RABBITMQ_URL);
   channel = await connection.createChannel();
   return channel;
 };
@@ -14,7 +20,10 @@ export const publishToQueue = async (queue: string, msg: object) => {
   channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
 };
 
-export const consumeFromQueue = async (queue: string, callback: (msg: any) => void) => {
+export const consumeFromQueue = async (
+  queue: string,
+  callback: (msg: any) => void,
+) => {
   if (!channel) throw new Error('RabbitMQ channel not initialized');
   await channel.assertQueue(queue);
   channel.consume(queue, (msg) => {

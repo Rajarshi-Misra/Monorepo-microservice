@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectRabbitMQ, publishToQueue } from '../../../common/src/rabbitmq';
+import { connectRabbitMQ, publishToQueue } from '@mynth/common';
 
 const app = express();
 const PORT = 3001;
@@ -10,7 +10,7 @@ app.post('/send', async (req, res) => {
   try {
     await publishToQueue('my_queue', { message });
     res.json({ status: 'Message sent' });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to send message' });
   }
 });

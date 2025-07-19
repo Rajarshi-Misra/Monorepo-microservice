@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@mynth/common": "*",
     "axios": "^1.10.0",
     "express": "^5.1.0"
   },

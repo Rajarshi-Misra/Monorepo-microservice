@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectRabbitMQ, consumeFromQueue } from '../../../common/src/rabbitmq';
+import { connectRabbitMQ, consumeFromQueue } from '@mynth/common';
 
 const app = express();
 const PORT = 3002;

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm --workspace services/service-a run dev\" \"npm --workspace services/service-b run dev\"",
+    "build": "npm --workspace common run build && npm --workspace services/service-a run build && npm --workspace services/service-b run build",
+    "lint": "eslint . --ext .ts,.js --ignore-pattern .gitignore",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -16,15 +19,17 @@
     "common"
   ],
   "devDependencies": {
+    "@eslint/compat": "^1.3.1",
     "@types/amqplib": "^0.10.7",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "concurrently": "^9.2.0",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.6.2",
     "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "amqplib": "^0.10.8"
   }
 }

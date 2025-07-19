@@ -1,12 +1,17 @@
 {
-  "name": "common",
+  "name": "@mynth/common",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "amqplib": "^0.10.8",
+    "dotenv": "^17.2.0"
+  }
 }

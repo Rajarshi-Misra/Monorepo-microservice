@@ -5,6 +5,10 @@
     "outDir": "dist",
     "strict": true,
     "esModuleInterop": true, //to use import syntax
-    "skipLibCheck": true //avoid type check for libs
+    "skipLibCheck": true, //avoid type check for libs
+    "baseUrl": ".",
+    "paths": {
+      "@mynth/common/*": ["common/src/*"]
+    }
   }
 }

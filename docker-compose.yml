@@ -1,15 +1,32 @@
-version: '3.8'
-
 services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "5672:5672"      # RabbitMQ default
-      - "15672:15672"    # RabbitMQ management dashboard
+      - '5672:5672' # RabbitMQ default
+      - '15672:15672' # RabbitMQ management dashboard
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    env_file: .env
+    networks:
+      - mynth-network
+  service-a:
+    build:
+      context: .
+      dockerfile: ./services/service-a/Dockerfile
+    ports:
+      - '3001:3001'
+    env_file: .env
+    networks:
+      - mynth-network
+  service-b:
+    build:
+      context: .
+      dockerfile: ./services/service-b/Dockerfile
+    ports:
+      - '3002:3002'
+    env_file: .env
     networks:
       - mynth-network
 networks:
